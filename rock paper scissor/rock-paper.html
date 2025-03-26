@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5em;
+        }
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        .choice {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .choice:hover {
+            transform: scale(1.1);
+        }
+        .choice img {
+            width: 80px;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <div class="choices">
+        <div class="choice" onclick="playGame('rock')">
+            <img src="https://img.icons8.com/emoji/96/rock-emoji.png" alt="Rock">
+        </div>
+        <div class="choice" onclick="playGame('paper')">
+            <img src="https://img.icons8.com/emoji/96/page-facing-up.png" alt="Paper">
+        </div>
+        <div class="choice" onclick="playGame('scissors')">
+            <img src="https://img.icons8.com/emoji/96/scissors.png" alt="Scissors">
+        </div>
+    </div>
+    <div class="result" id="result">Make Your Move!</div>
+    <script>
+        function playGame(userChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let resultMessage;
+            
+            if (userChoice === computerChoice) {
+                resultMessage = "It's a Draw!";
+            } else if (
+                (userChoice === 'rock' && computerChoice === 'scissors') ||
+                (userChoice === 'scissors' && computerChoice === 'paper') ||
+                (userChoice === 'paper' && computerChoice === 'rock')
+            ) {
+                resultMessage = "You Win! 🎉";
+            } else {
+                resultMessage = "You Lose! 😢";
+            }
+            document.getElementById("result").innerText = `Computer chose ${computerChoice.toUpperCase()} - ${resultMessage}`;
+        }
+    </script>
+</body>
+</html>
