@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voting App</title>
+</head>
+<body>
+    <h2>Vote for your favorite!</h2>
+    <button onclick="vote('cats')">🐱 Cats</button>
+    <button onclick="vote('dogs')">🐶 Dogs</button>
+
+    <h3>Current Results:</h3>
+    <p>Cats: <span id="catVotes">0</span></p>
+    <p>Dogs: <span id="dogVotes">0</span></p>
+
+    <script>
+        async function vote(animal) {
+            try {
+                const response = await fetch(`/vote/${animal}`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                updateVotes(data);
+            } catch (error) {
+                console.error('Voting failed:', error);
+            }
+        }
+
+        async function getResults() {
+            const response = await fetch('/results');
+            const data = await response.json();
+            updateVotes(data);
+        }
+
+        function updateVotes(data) {
+            document.getElementById('catVotes').innerText = data.cats;
+            document.getElementById('dogVotes').innerText = data.dogs;
+        }
+
+        getResults();
+    </script>
+</body>
+</html>

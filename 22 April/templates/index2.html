@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Counter</title>
+</head>
+<body>
+    <h2>Click the button to increase the count!</h2>
+    <button onclick="incrementCounter()">Click Me</button>
+    <p>Current Count: <span id="counter">0</span></p>
+
+    <script>
+        async function incrementCounter() {
+            try {
+                const response = await fetch('/increment', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                document.getElementById('counter').innerText = data.count;
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+    </script>
+</body>
+</html>
